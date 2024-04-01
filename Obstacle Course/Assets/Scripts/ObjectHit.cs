@@ -7,14 +7,12 @@ public class ObjectHit : MonoBehaviour
 {
     private Color _spawnColor;
     private Color _hitColor;
-    private Color _currentColor;
     private MeshRenderer _meshRenderer;
     private float _resetTime;
 
     void Start() {
         _meshRenderer = GetComponent<MeshRenderer>();
         _spawnColor = _meshRenderer.material.color;
-        _currentColor = _meshRenderer.material.color;
         _hitColor = Color.red;
         _resetTime = 3f;
     }
@@ -22,24 +20,37 @@ public class ObjectHit : MonoBehaviour
     // OnCollisionEnter() is called whenever a collision event occurs
     private void OnCollisionEnter(Collision collision) 
     {
-        UpdateCurrentColor();
-        if (collision.gameObject.name == "Dodgy" && _currentColor != _hitColor) {
+        if (collision.gameObject.tag == "Player" && gameObject.tag != "Hit") {
+            Hit();
             Debug.Log($"{gameObject.name} hit by {collision.gameObject.name}");
-            ChangeToHitColor();
-
-            CoroutineManager.DelayedAction(_resetTime, ChangeToSpawnColor);
+            CoroutineManager.DelayedAction(_resetTime, Reset);
         }
+    }
+
+    private void Hit() {
+        TagHit();
+        ChangeToHitColor();
+    }
+
+    private void Reset() {
+        Untag();
+        ResetColor();
+    }
+
+    private void TagHit() {
+        gameObject.tag = "Hit";
+    }
+
+    private void Untag() {
+        gameObject.tag = "Untagged";
+
     }
 
     private void ChangeToHitColor() {
         _meshRenderer.material.color = _hitColor;
     }
 
-    private void ChangeToSpawnColor() {
+    private void ResetColor() {
         _meshRenderer.material.color = _spawnColor;
-    }
-
-    private void UpdateCurrentColor() {
-        _currentColor = _meshRenderer.material.color;
     }
 }

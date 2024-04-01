@@ -13,9 +13,8 @@ public class Scorer : MonoBehaviour
         _collisions = 0;
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        var objectHit = collision.gameObject.GetComponent<ObjectHit>();
-        if (objectHit is not null) {
+    private void OnCollisionEnter(Collision collision) {;
+        if (collision.gameObject.tag != "Hit") {
             _collisions++;
             Debug.Log($"You've bumped into a thing {_collisions} many times");
         }

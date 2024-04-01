@@ -23,7 +23,6 @@ public class Dropper : MonoBehaviour
         _falling = false;
         _resetTime = 3f;
         _spawnPosition = transform.position;    
-
     }
 
     // Update is called once per frame
@@ -43,9 +42,17 @@ public class Dropper : MonoBehaviour
 
     private void Reset()
     {
+        ResetFields();
+        ResetPosition();
+    }
+
+    private void ResetFields() {
         _renderer.enabled = false;
         _rigidbody.useGravity = false;
         _falling = false;
+    }
+
+    private void ResetPosition() {
         transform.position = _spawnPosition;
     }
 }
