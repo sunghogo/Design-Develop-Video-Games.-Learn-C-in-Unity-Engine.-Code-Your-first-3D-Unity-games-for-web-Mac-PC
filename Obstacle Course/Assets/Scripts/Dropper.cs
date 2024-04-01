@@ -9,6 +9,7 @@ public class Dropper : MonoBehaviour
     private Rigidbody _rigidbody;
     private bool _falling;
     private Vector3 _spawnPosition;
+    private float _resetTime;
 
 
     // Start is called before the first frame update
@@ -20,8 +21,8 @@ public class Dropper : MonoBehaviour
         _renderer.enabled = false;
         _rigidbody.useGravity = false;
         _falling = false;
-
-        _spawnPosition = transform.position;
+        _resetTime = 3f;
+        _spawnPosition = transform.position;    
 
     }
 
@@ -30,7 +31,7 @@ public class Dropper : MonoBehaviour
     {
         if (!_falling && (int)Time.time > 0 && ((int)Time.time % _timeToWait == 0)) {
             Fall();
-            // StartCoroutine(Reset);
+            CoroutineManager.DelayedAction(_resetTime, Reset);
         }
     }
 
@@ -40,10 +41,11 @@ public class Dropper : MonoBehaviour
         _falling = true;
     }
 
-    private IEnumerator Reset()
+    private void Reset()
     {
-        // yield return new WaitForSeconds(seconds);
-
-
+        _renderer.enabled = false;
+        _rigidbody.useGravity = false;
+        _falling = false;
+        transform.position = _spawnPosition;
     }
 }

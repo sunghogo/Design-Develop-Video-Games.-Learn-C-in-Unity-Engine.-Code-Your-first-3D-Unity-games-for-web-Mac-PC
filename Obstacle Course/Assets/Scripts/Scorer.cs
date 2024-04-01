@@ -14,10 +14,10 @@ public class Scorer : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.GetComponent<MeshRenderer>().material.color == Color.red || collision.gameObject.name == "Plane") {
-            return;
+        var objectHit = collision.gameObject.GetComponent<ObjectHit>();
+        if (objectHit is not null) {
+            _collisions++;
+            Debug.Log($"You've bumped into a thing {_collisions} many times");
         }
-        _collisions++;
-        Debug.Log($"You've bumped into a thing {_collisions} many times");
     }
 }

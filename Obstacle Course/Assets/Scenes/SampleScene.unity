@@ -829,6 +829,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4725090670264114306, guid: 84f0e152bd53c4a46833afcf452937de, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 6242989802528280882, guid: 84f0e152bd53c4a46833afcf452937de, type: 3}
       propertyPath: m_Name
       value: FallingObstacle

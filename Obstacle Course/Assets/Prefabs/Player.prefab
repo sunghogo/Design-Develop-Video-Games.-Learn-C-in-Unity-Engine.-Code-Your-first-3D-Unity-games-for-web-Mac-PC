@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9022294747521244809}
   - component: {fileID: 8783098799471085381}
   - component: {fileID: 1282938470579829019}
-  - component: {fileID: 3436456498021352391}
   - component: {fileID: 7093442305730636370}
-  - component: {fileID: 7677686880501964995}
+  - component: {fileID: 2092668502754782565}
+  - component: {fileID: 3876327355801409024}
   m_Layer: 0
   m_Name: Dodgy
   m_TagString: Untagged
@@ -108,22 +108,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3436456498021352391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3333361551997662446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8028e4fe1885e1499aa3961864d2e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  XVelocity: 0
-  YVelocity: 0
-  ZVelocity: 0
-  MoveSpeed: 10
 --- !u!54 &7093442305730636370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,9 +133,25 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7677686880501964995
+--- !u!114 &2092668502754782565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333361551997662446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8028e4fe1885e1499aa3961864d2e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xVelocity: 0
+  _yVelocity: 0
+  _zVelocity: 0
+  _moveSpeed: 0
+--- !u!114 &3876327355801409024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7df15b5fd4c5c0408484be6013dabd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collisions: 0
 --- !u!1 &7649544278048379984
 GameObject:
   m_ObjectHideFlags: 0
