@@ -14,9 +14,12 @@ public class Scorer : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {;
-        if (collision.gameObject.tag != "Hit") {
+        if (collision.gameObject.tag != "Hit")  {
             _collisions++;
             Debug.Log($"You've bumped into a thing {_collisions} many times");
+        }
+        if (collision.gameObject.name == "Finish") {
+            Debug.Log($"You Won! You had {_collisions} collisions");
         }
     }
 }

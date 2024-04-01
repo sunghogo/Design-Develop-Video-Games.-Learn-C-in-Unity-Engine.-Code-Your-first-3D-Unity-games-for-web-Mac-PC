@@ -13,7 +13,7 @@ public class Spinner : MonoBehaviour
     void Start()
     {
         _xAngle = 0;
-        _yAngle = 1;
+        _yAngle = 20;
         _zAngle = 0;
 
         _rotationSpeed = 10;
