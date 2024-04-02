@@ -7,11 +7,17 @@ using UnityEngine.TextCore.LowLevel;
 
 public class Movement : MonoBehaviour
 {
-    private Rigidbody _rigidBody;
-    private AudioSource _audioSource;
+    // PARAMTERS - for tuning, typically set in the editor;
 
+    // CACHE - e.g. references for readability or speed;
+
+    // STATE - privvate instance (member) variables
     [SerializeField] private float _mainThrust;
     [SerializeField] private float _rotationThrust;
+    [SerializeField] private AudioClip _mainEngineAudio;
+
+    private Rigidbody _rigidBody;
+    private AudioSource _audioSource;
 
 
     // Start is called before the first frame update
@@ -41,7 +47,7 @@ public class Movement : MonoBehaviour
     private void ProcessThrust() {
         if (Input.GetKey(KeyCode.Space)) {
             ApplyThrust();
-            if (!_audioSource.isPlaying) _audioSource.Play();
+            if (!_audioSource.isPlaying) _audioSource.PlayOneShot(_mainEngineAudio);
         } else {
             _audioSource.Stop();
         }
@@ -76,5 +82,9 @@ public class Movement : MonoBehaviour
     private void ApplyThrust() {
         _rigidBody.AddRelativeForce(UnityEngine.Vector3.up * _mainThrust * Time.deltaTime);
 
+    }
+
+    public void StopScript() {
+        this.enabled = false;
     }
 }
