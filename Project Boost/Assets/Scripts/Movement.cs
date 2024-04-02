@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.TextCore.LowLevel;
 
 public class Movement : MonoBehaviour
 {
     private Rigidbody _rigidBody;
+    private AudioSource _audioSource;
 
     [SerializeField] private float _mainThrust;
     [SerializeField] private float _rotationThrust;
@@ -16,6 +18,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
         _rigidBody.drag = 0.25f;
         _mainThrust = 1000f;
         _rotationThrust = 100f;
@@ -38,6 +41,9 @@ public class Movement : MonoBehaviour
     private void ProcessThrust() {
         if (Input.GetKey(KeyCode.Space)) {
             ApplyThrust();
+            if (!_audioSource.isPlaying) _audioSource.Play();
+        } else {
+            _audioSource.Stop();
         }
     }
 
