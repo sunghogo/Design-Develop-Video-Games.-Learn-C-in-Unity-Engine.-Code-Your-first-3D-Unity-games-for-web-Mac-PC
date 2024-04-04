@@ -50,29 +50,31 @@ public class Movement : MonoBehaviour
     }
 
     private void ProcessThrust() {
-        if (Input.GetKey(KeyCode.Space)) {
-            ApplyThrust();
-            if (!_audioSource.isPlaying) _audioSource.PlayOneShot(_mainEngineAudio);
-            if (!_mainEngineParticles.isPlaying) _mainEngineParticles.Play();
-        } else {
-            _audioSource.Stop();
-            _mainEngineParticles.Stop();
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartThrust();
+        }
+        else
+        {
+            StopThrust();
         }
     }
 
-    private void ProcessRotation() {
+    private void ProcessRotation()
+    {
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            RotateLeft();
-            if (!_rightEngineParticles.isPlaying) _rightEngineParticles.Play();
-        } else _rightEngineParticles.Stop();
-        
+            StartRotateLeft();
+        }
+        else StopRotateLeft();
+
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            RotateRight();
-            if (!_leftEngineParticles.isPlaying) _leftEngineParticles.Play();
-        }  else _leftEngineParticles.Stop();
+            StartRotateRight();
+        }
+        else StopRotateRight();
     }
+
 
     private void RotateLeft() {
         ApplyRotation(_rotationThrust);
@@ -80,6 +82,29 @@ public class Movement : MonoBehaviour
 
     private void RotateRight() {
         ApplyRotation(-_rotationThrust);
+    }
+
+    private void StartRotateRight()
+    {
+        RotateRight();
+        if (!_leftEngineParticles.isPlaying) _leftEngineParticles.Play();
+    }
+
+    private void StopRotateRight()
+    {
+        _leftEngineParticles.Stop();
+    }
+
+
+    private void StartRotateLeft()
+    {
+        RotateLeft();
+        if (!_rightEngineParticles.isPlaying) _rightEngineParticles.Play();
+    }
+
+    private void StopRotateLeft()
+    {
+        _rightEngineParticles.Stop();
     }
 
     private void ApplyRotation(float rotationThrust)
@@ -92,6 +117,19 @@ public class Movement : MonoBehaviour
     private void ApplyThrust() {
         _rigidBody.AddRelativeForce(UnityEngine.Vector3.up * _mainThrust * Time.deltaTime);
 
+    }
+    
+    private void StopThrust()
+    {
+        _audioSource.Stop();
+        _mainEngineParticles.Stop();
+    }
+
+    private void StartThrust()
+    {
+        ApplyThrust();
+        if (!_audioSource.isPlaying) _audioSource.PlayOneShot(_mainEngineAudio);
+        if (!_mainEngineParticles.isPlaying) _mainEngineParticles.Play();
     }
 
     public void StopScript() {
