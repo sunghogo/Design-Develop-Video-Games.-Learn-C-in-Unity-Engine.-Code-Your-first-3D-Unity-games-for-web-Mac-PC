@@ -7,23 +7,23 @@ using UnityEngine;
 public class Dropper : MonoBehaviour
 {
     [SerializeField] private UnityEngine.Vector3 _movementVector;
-    [SerializeField] private float _duration;
-    private bool _hitObject;
+    [SerializeField] private float _holdDuration;
+
+    private UnityEngine.Vector3 _startingPosition;
+
+    private float _startingTime;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _hitObject = false;
+        _startingPosition = transform.position;
+        _startingTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!_hitObject) transform.position += _movementVector * Time.deltaTime * 1/ _duration;
-    }
-
-    void OnCollisionEnter() {
-        _hitObject = true;
+        if ((Time.time - _startingTime) <= _holdDuration) transform.position = _startingPosition;
     }
 }

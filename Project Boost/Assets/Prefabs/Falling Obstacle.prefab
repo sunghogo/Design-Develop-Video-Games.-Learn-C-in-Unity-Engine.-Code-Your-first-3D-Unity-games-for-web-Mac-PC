@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementVector: {x: 0, y: -25, z: 0}
-  _duration: 3
+  _duration: 6
