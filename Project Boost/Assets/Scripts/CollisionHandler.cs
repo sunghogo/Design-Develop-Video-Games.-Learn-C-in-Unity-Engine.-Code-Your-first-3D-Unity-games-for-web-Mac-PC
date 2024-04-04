@@ -10,6 +10,8 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] private float _levelLoadDelay;
     [SerializeField] private AudioClip _successAudio;
     [SerializeField] private AudioClip _crashAudio;
+    [SerializeField] private ParticleSystem _successParticles;
+    [SerializeField] private ParticleSystem _crashParticles;
 
     private Movement _movement;
     private AudioSource _audioSource;
@@ -43,12 +45,14 @@ public class CollisionHandler : MonoBehaviour
 
     void CrashSequence() {
         StopAndPlayAudioClip(_crashAudio);
+        _crashParticles.Play();
         _movement.StopScript();
         Invoke("ReloadLevel", _levelLoadDelay);
     }
 
     void FinishSequence() {
         StopAndPlayAudioClip(_successAudio);
+        _successParticles.Play();        
         _movement.StopScript();
         Invoke("LoadNextLevel", _levelLoadDelay);
     }
