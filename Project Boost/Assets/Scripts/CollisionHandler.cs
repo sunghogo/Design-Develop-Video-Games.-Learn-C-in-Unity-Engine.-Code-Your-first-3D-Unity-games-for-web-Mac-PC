@@ -16,6 +16,8 @@ public class CollisionHandler : MonoBehaviour
     private Movement _movement;
     private AudioSource _audioSource;
     private bool _isTransitioning;
+    private bool _collisionDisabled;
+
 
     void Start() {
         _movement = GetComponent<Movement>();
@@ -23,10 +25,24 @@ public class CollisionHandler : MonoBehaviour
         
         _levelLoadDelay = 2f;
         _isTransitioning = false;
+        _collisionDisabled = false;
+    }
+
+    void Update() {
+        RespondToDebugKeys();
+    }
+
+    private void RespondToDebugKeys() {
+        if (Input.GetKey(KeyCode.L)) {
+            LoadNextLevel();
+        } else if (Input.GetKey(KeyCode.C)){
+            _collisionDisabled = !_collisionDisabled;
+        }
+
     }
 
     private void OnCollisionEnter(Collision other) {
-        if (_isTransitioning) return;
+        if (_isTransitioning || _collisionDisabled) return;
 
         switch (other.gameObject.tag) {
             case "Friendly":
